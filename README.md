@@ -13,8 +13,8 @@ A aplicação é composta do microserviços, carros-api.
 
 A aplicações criam as tabelas automaticamente quando são executadas pela primeira vez, porém o banco de dados deve ser criado no Mysql.
 
-As aplicações estão configuradas para se conectar ao banco de dados `dev`, por isso antes de rodar as aplicações, crie esse banco de dados. 
-Se quiser alterar o nome do banco de dados, altere o arquivo application.properties de cada projeto. 
+A aplicações esta configurada para se conectar ao banco de dados Mysql, por isso antes de rodar as aplicações, crie esse banco de dados. 
+Se quiser alterar o nome do banco de dados, altere o arquivo application.properties do projeto. 
 
 
 ## Maven
