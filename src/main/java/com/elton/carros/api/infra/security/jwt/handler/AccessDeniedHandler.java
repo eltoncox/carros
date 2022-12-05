@@ -1,6 +1,5 @@
 package com.elton.carros.api.infra.security.jwt.handler;
 
-
 import com.elton.carros.api.infra.security.jwt.ServletUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;

@@ -7,17 +7,16 @@ import org.modelmapper.ModelMapper;
 public class CarroDTO {
     private Long id;
     private String nome;
-    private String descricao;
     private String tipo;
-    private String url_foto;
-    private String url_video;
-    private String latitude;
-    private String longitude;
 
-    public static CarroDTO create(Carro c) {
+    /*public CarroDTO(Carro carro) {
+        this.id = carro.getId();
+        this.nome = carro.getNome();
+        this.tipo = carro.getTipo();
+    }*/
+
+    public static CarroDTO create(Carro carro) {
         ModelMapper modelMapper = new ModelMapper();
-        return  modelMapper.map(c, CarroDTO.class);
+        return modelMapper.map(carro, CarroDTO.class);
     }
 }
-
-

@@ -1,17 +1,12 @@
 package com.elton.carros;
 
 import com.elton.carros.api.carros.Carro;
-import com.elton.carros.api.carros.CarroService;
 import com.elton.carros.api.carros.CarroDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
@@ -21,23 +16,19 @@ import static junit.framework.TestCase.assertNotNull;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = CarrosApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class CarrosAPITest {
-    @Autowired
-    protected TestRestTemplate rest;
-
-    @Autowired
-    private CarroService service;
+public class CarrosAPITest extends BaseAPITest {
 
     private ResponseEntity<CarroDTO> getCarro(String url) {
-        return
-                rest.withBasicAuth("elton","elton").getForEntity(url, CarroDTO.class);
+        return get(url, CarroDTO.class);
     }
 
     private ResponseEntity<List<CarroDTO>> getCarros(String url) {
-        return rest.withBasicAuth("elton","elton").exchange(
+        HttpHeaders headers = getHeaders();
+
+        return rest.exchange(
                 url,
                 HttpMethod.GET,
-                null,
+                new HttpEntity<>(headers),
                 new ParameterizedTypeReference<List<CarroDTO>>() {
                 });
     }
@@ -50,7 +41,7 @@ public class CarrosAPITest {
         carro.setTipo("esportivos");
 
         // Insert
-        ResponseEntity response = rest.withBasicAuth("admin","root").postForEntity("/api/v1/carros", carro, null);
+        ResponseEntity response = post("/api/v1/carros", carro, null);
         System.out.println(response);
 
         // Verifica se criou
@@ -65,20 +56,22 @@ public class CarrosAPITest {
         assertEquals("esportivos", c.getTipo());
 
         // Deletar o objeto
-        rest.withBasicAuth("elton","elton").delete(location);
+        delete(location, null);
 
         // Verificar se deletou
         assertEquals(HttpStatus.NOT_FOUND, getCarro(location).getStatusCode());
     }
 
-
     @Test
     public void testLista() {
         List<CarroDTO> carros = getCarros("/api/v1/carros").getBody();
         assertNotNull(carros);
+        assertEquals(10, carros.size());
+
+        carros = getCarros("/api/v1/carros?page=0&size=30").getBody();
+        assertNotNull(carros);
         assertEquals(30, carros.size());
     }
-
 
     @Test
     public void testListaPorTipo() {
@@ -90,7 +83,6 @@ public class CarrosAPITest {
         assertEquals(HttpStatus.NO_CONTENT, getCarros("/api/v1/carros/tipo/xxx").getStatusCode());
     }
 
-
     @Test
     public void testGetOk() {
 
@@ -98,9 +90,9 @@ public class CarrosAPITest {
         assertEquals(response.getStatusCode(), HttpStatus.OK);
 
         CarroDTO c = response.getBody();
+        assertNotNull(c);
         assertEquals("Ferrari FF", c.getNome());
     }
-
 
     @Test
     public void testGetNotFound() {
@@ -108,5 +100,4 @@ public class CarrosAPITest {
         ResponseEntity response = getCarro("/api/v1/carros/1100");
         assertEquals(response.getStatusCode(), HttpStatus.NOT_FOUND);
     }
-
 }

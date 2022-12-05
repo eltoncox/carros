@@ -1,6 +1,5 @@
 package com.elton.carros.api.infra.security.jwt.handler;
 
-
 import com.elton.carros.api.infra.security.jwt.ServletUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

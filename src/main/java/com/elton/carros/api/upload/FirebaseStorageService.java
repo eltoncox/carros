@@ -1,7 +1,9 @@
 package com.elton.carros.api.upload;
 
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.storage.*;
+import com.google.cloud.storage.Acl;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.Bucket;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.StorageClient;
@@ -18,35 +20,28 @@ public class FirebaseStorageService {
 
     @PostConstruct
     private void init() throws IOException {
-
-        if (FirebaseApp.getApps().isEmpty()) {
+        if(FirebaseApp.getApps().isEmpty()) {
             InputStream in =
                     FirebaseStorageService.class.getResourceAsStream("/carros-api-4f356-firebase-adminsdk-tp5cn-67168b086c.json");
 
             System.out.println(in);
 
-            System.out.println(in);
+            FirebaseOptions options = new FirebaseOptions.Builder()
+                    .setCredentials(GoogleCredentials.fromStream(in))
+                    .setStorageBucket("carros-api-4f356.appspot.com")
+                    .build();
 
-            if(in != null) {
-                FirebaseOptions options = new FirebaseOptions.Builder()
-                        .setCredentials(GoogleCredentials.fromStream(in))
-                        .setStorageBucket("carros-api-4f356.appspot.com")
-                        .setDatabaseUrl("https://seu-projeto.firebaseio.com")
-                        .build();
-
-                FirebaseApp.initializeApp(options);
-            } else {
-                System.err.println("Configure o arquivo serviceAccountKey.json do Firebase NOT FOUND!");
-            }
+            FirebaseApp.initializeApp(options);
         }
     }
 
     public String upload(UploadInput uploadInput) {
 
+
         Bucket bucket = StorageClient.getInstance().bucket();
         System.out.println(bucket);
 
-//        Blob blob = bucket.create("nome.txt","Elton Luiz Firebases".getBytes(), "text/html");
+//        Blob blob = bucket.create("nome.txt","Elton Luiz".getBytes(), "text/html");
 
         byte[] bytes = Base64.getDecoder().decode(uploadInput.getBase64());
 
@@ -54,7 +49,7 @@ public class FirebaseStorageService {
         Blob blob = bucket.create(fileName,bytes, uploadInput.getMimeType());
 
         // Assina URL válida por N dias
-        //URL signedUrl = blob.signUrl(1, TimeUnit.DAYS);
+//        URL signedUrl = blob.signUrl(3, TimeUnit.DAYS);
 
         // Deixa URL pública
         blob.createAcl(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER));
@@ -72,16 +67,3 @@ public class FirebaseStorageService {
  }
  }
 */
-
-/**
- service firebase.storage {
- match /b/{bucket}/o {
- match /{allPaths=**} {
- allow write: if request.auth != null;
- }
- match /{allPaths=**} {
- allow read;
- }
- }
- }
-**/

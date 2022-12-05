@@ -2,7 +2,10 @@ package com.elton.carros.api.upload;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
@@ -23,8 +26,6 @@ public class UploadController {
 
     @PostMapping
     public ResponseEntity upload(@RequestBody UploadInput uploadInput) throws IOException {
-
-//        String url = "Filename: " + uploadInput.getFileName() + " >> base64 > " + uploadInput.getBase64();
 
         String url = uploadService.upload(uploadInput);
 

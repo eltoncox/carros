@@ -1,6 +1,5 @@
 package com.elton.carros.api.infra.security.jwt;
 
-
 import com.elton.carros.api.users.User;
 import com.elton.carros.api.users.UserDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -74,3 +73,5 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
 
 }
+
+
