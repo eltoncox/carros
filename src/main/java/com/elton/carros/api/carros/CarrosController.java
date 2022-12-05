@@ -1,9 +1,6 @@
-package com.elton.carros.api;
+package com.elton.carros.api.carros;
 
 
-import com.elton.carros.domain.Carro;
-import com.elton.carros.domain.CarroService;
-import com.elton.carros.domain.dto.CarroDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;

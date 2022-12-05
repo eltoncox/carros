@@ -1,4 +1,4 @@
-package com.elton.carros.api.exception;
+package com.elton.carros.api.infra.exception;
 
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;

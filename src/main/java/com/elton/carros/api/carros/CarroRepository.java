@@ -1,7 +1,7 @@
-package com.elton.carros.domain;
+package com.elton.carros.api.carros;
 
+import com.elton.carros.api.carros.Carro;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 

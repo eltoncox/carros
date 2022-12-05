@@ -1,7 +1,7 @@
-package com.elton.carros.api.security;
+package com.elton.carros.api.infra.security;
 
-import com.elton.carros.domain.User;
-import com.elton.carros.domain.UserRepository;
+import com.elton.carros.api.users.User;
+import com.elton.carros.api.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

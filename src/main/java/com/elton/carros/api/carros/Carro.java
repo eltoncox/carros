@@ -1,4 +1,4 @@
-package com.elton.carros.domain;
+package com.elton.carros.api.carros;
 
 import lombok.*;
 

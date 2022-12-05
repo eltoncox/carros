@@ -1,4 +1,4 @@
-package com.elton.carros.domain;
+package com.elton.carros.api.users;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

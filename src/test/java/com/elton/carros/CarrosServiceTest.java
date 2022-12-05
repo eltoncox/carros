@@ -1,9 +1,9 @@
 package com.elton.carros;
 
-import com.elton.carros.domain.Carro;
-import com.elton.carros.domain.CarroService;
-import com.elton.carros.domain.dto.CarroDTO;
-import com.elton.carros.api.exception.ObjectNotFoundException;
+import com.elton.carros.api.carros.Carro;
+import com.elton.carros.api.carros.CarroService;
+import com.elton.carros.api.carros.CarroDTO;
+import com.elton.carros.api.infra.exception.ObjectNotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +59,7 @@ public class CarrosServiceTest {
 
         List<CarroDTO> carros = service.getCarros();
 
-        assertEquals(31, carros.size());
+        assertEquals(30, carros.size());
     }
 
     @Test

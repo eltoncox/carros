@@ -1,6 +1,5 @@
-package com.elton.carros.domain.dto;
+package com.elton.carros.api.carros;
 
-import com.elton.carros.domain.Carro;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
 

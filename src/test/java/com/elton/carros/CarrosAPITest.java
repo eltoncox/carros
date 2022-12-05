@@ -1,8 +1,8 @@
 package com.elton.carros;
 
-import com.elton.carros.domain.Carro;
-import com.elton.carros.domain.CarroService;
-import com.elton.carros.domain.dto.CarroDTO;
+import com.elton.carros.api.carros.Carro;
+import com.elton.carros.api.carros.CarroService;
+import com.elton.carros.api.carros.CarroDTO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,14 +76,14 @@ public class CarrosAPITest {
     public void testLista() {
         List<CarroDTO> carros = getCarros("/api/v1/carros").getBody();
         assertNotNull(carros);
-        assertEquals(31, carros.size());
+        assertEquals(30, carros.size());
     }
 
 
     @Test
     public void testListaPorTipo() {
 
-        assertEquals(11, getCarros("/api/v1/carros/tipo/classicos").getBody().size());
+        assertEquals(10, getCarros("/api/v1/carros/tipo/classicos").getBody().size());
         assertEquals(10, getCarros("/api/v1/carros/tipo/esportivos").getBody().size());
         assertEquals(10, getCarros("/api/v1/carros/tipo/luxo").getBody().size());
 
